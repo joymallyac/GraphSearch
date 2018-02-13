@@ -61,7 +61,6 @@ public class Graph {
 				
 			}
 		}
-		
 	}
 	
 	// return node from city name
@@ -90,77 +89,6 @@ public class Graph {
 		return adjNodes;
 	}
 	
-	
-	public void UNIFORM(Node startNode, Node endNode)
-	{
-		Node s = startNode;
-		Node e = endNode;
-		//initialize nodes
-		for(int i = 0; i < size; i++)
-		{
-			nodes.get(i).color = "WHITE";
-			nodes.get(i).parent = null;
-		}
-		s.color = "GRAY";
-		s.parent = null;
-		s.d = 0;
-		s.h = 0;
-		
-		ArrayList<Node> q = new ArrayList<Node>();
-		q.add(s);
-		while(!q.isEmpty())
-		{
-			Node u = getMin(q);
-			q.remove(u);
-			
-			
-		
-			ArrayList<Node> adjNodes = new ArrayList<Node>();
-			adjNodes = getAdjNodes(u);
-			for(int i = 0; i < adjNodes.size(); i++)
-			{
-				Node v = adjNodes.get(i);
-				if(v.color != "BLACK")
-				{
-					if(v.color == "WHITE"){
-						v.color = "GRAY";
-						v.parent = u;
-						
-						int sIndex=nodes.indexOf(u);
-						int eIndex=nodes.indexOf(v);
-						v.d = u.d + adjMatrix[sIndex][eIndex];
-						v.h = 0;
-						q.add(v);
-					}
-					else{
-						
-						int sIndex=nodes.indexOf(u);
-						int eIndex=nodes.indexOf(v);
-						double temp = u.d + adjMatrix[sIndex][eIndex];
-						double temp2 = q.get(q.indexOf(v)).d + q.get(q.indexOf(v)).h;
-						if(temp < temp2){
-							v.parent = u;
-							v.d = temp;
-							v.h = 0;
-						}
-						
-					}
-				}
-			}
-			u.color = "BLACK";
-			expandedNodes.add(u);
-			
-			if(u == e){
-				return;
-			}
-			
-			//removeMultiPath(q);
-			
-
-			
-		}
-		
-	}
 	
 	public void BFS(Node startNode, Node endNode)
 	{
@@ -202,19 +130,6 @@ public class Graph {
 						v.h = 0;
 						q.add(v);
 					}
-					/*else{
-						
-						int sIndex=nodes.indexOf(u);
-						int eIndex=nodes.indexOf(v);
-						double temp = u.d + adjMatrix[sIndex][eIndex];
-						double temp2 = q.get(q.indexOf(v)).d + q.get(q.indexOf(v)).h;
-						if(temp < temp2){
-							v.parent = u;
-							v.d = temp;
-							v.h = 0;
-						}
-						
-					}*/
 				}
 			}
 			u.color = "BLACK";
@@ -223,15 +138,9 @@ public class Graph {
 			if(u == e){
 				return;
 			}
-			
-			//removeMultiPath(q);
-			
-
-			
 		}
 		
 	}
-	
 	public void DFS(Node startNode, Node endNode)
 	{
 		Node s = startNode;
@@ -252,7 +161,6 @@ public class Graph {
 		while(!q.isEmpty())
 		{
 			Node u = q.get(q.size()-1);
-			//q.remove(u);
 			
 		
 			ArrayList<Node> adjNodes = new ArrayList<Node>();
@@ -273,11 +181,11 @@ public class Graph {
 						q.add(v);
 						break;
 					}
-					else{
-						
-						q.remove(u);
-						
-					}
+				}
+				else{
+					if(i == adjNodes.size()-1)
+					q.remove(u);
+					
 				}
 			}
 			u.color = "BLACK";
@@ -286,15 +194,9 @@ public class Graph {
 			if(u == e){
 				return;
 			}
-			
-			//removeMultiPath(q);
-			
-
-			
 		}
 		
-	}		
-	
+	}
 	
 	public void Astar(Node startNode, Node endNode)
 	{
@@ -366,22 +268,7 @@ public class Graph {
 		
 	}
 	
-
 	
-	public Node getGreedyMin(ArrayList<Node> q){
-		
-		Node n = q.get(0);
-		double tempmin = q.get(0).h;
-		
-		for(int i = 1; i < q.size(); i++){
-			if(tempmin >= q.get(i).h){
-				tempmin = q.get(i).h;
-				n = q.get(i);
-			}
-		}
-		
-		return n;
-	}
 	
 	public Node getMin(ArrayList<Node> q){
 		
