@@ -116,6 +116,12 @@ public class SearchUSA {
 
 	}
 
+    public static int sub(int a,int b){
+
+	return (float)(a-b);
+
+	}
+
 
 
 }
