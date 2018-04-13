@@ -112,7 +112,7 @@ public class SearchUSA {
 
 	public static int add(int a,int b){
 
-	return(a+b);
+	return (float)(a+b);
 
 	}
 
