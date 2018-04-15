@@ -110,18 +110,11 @@ public class SearchUSA {
         }
 	}
 
-	public int add(int a,int b){
-    int c = 0;
-	return (float)(a+b);
 
+    public static int add(int a, int b) {
+		double d = a+b;
+		return d;
 	}
-
-    public static int sub(int a,int b){
-
-	return (float)(a-b);
-
-	}
-
 
 
 }
